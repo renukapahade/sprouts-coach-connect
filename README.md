@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏋️‍♂️ CoachConnect - Coach Booking Platform
 
-## Getting Started
+A modern, full-stack Next.js application for booking fitness and nutrition coaches with integrated payment processing. Built with Indian coaches and cultural context in mind.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🎯 **Core Functionality**
+- **Coach Discovery** - Browse certified fitness trainers and nutrition experts
+- **Package-Based Booking** - Training packages
+- **Secure Payments** - Integrated Cashfree Payment Gateway
+- **User Dashboard** - Track subscriptions and package progress by Email
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🔧 **Technical Features**
+- **Next.js 14** with App Router
+- **TypeScript**
+- **MongoDB**
+- **Zod** validation for runtime type checking
+- **Tailwind CSS** with shadcn/ui components
+- **Cashfree Integration** - Popular Indian payment gateway
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repository**
+\`\`\`bash
+git clone <repository-url>
+cd coach-booking-app
+\`\`\`
 
-## Learn More
+2. **Install dependencies**
+\`\`\`bash
+npm install
+\`\`\`
 
-To learn more about Next.js, take a look at the following resources:
+3. **Environment Setup**
+\`\`\`bash
+cp .env.example .env.local
+\`\`\`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit `http://localhost:3000` to see the application! 🎉
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+\`\`\`
+coach-booking-app/
+├── app/                          # Next.js App Router
+│   ├── api/                      # API Routes
+│   │   ├── coaches/              # Coach management
+│   │   ├── users/                # User management
+│   │   ├── subscriptions/        # Package bookings
+│   │   ├── payments/             # Payment processing
+│   │   └── admin/                # Admin utilities
+│   ├── coaches/                  # Coach pages
+│   ├── booking/                  # Booking flow
+│   ├── dashboard/                # User dashboard
+│   └── admin/                    # Admin interface
+├── components/                   # Reusable components
+│   ├── ui/                       # shadcn/ui components
+│   ├── coach-card.tsx           # Coach display card
+│   └── package-card.tsx         # Package display card
+├── lib/                         # Utilities and configurations
+│   ├── mongodb.ts               # Database connection
+│   ├── cashfree.ts              # Payment integration
+│   ├── validations.ts           # Zod schemas
+│   └── api-client.ts            # API client
+├── types/                       # TypeScript definitions
+└── public/                      # Static assets
+\`\`\`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔌 API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **Coaches**
+- `GET /api/coaches` - List coaches with filtering
+- `GET /api/coaches/[id]` - Get coach details
+- `POST /api/coaches` - Create new coach (admin)
+
+### **Users**
+- `POST /api/users` - Create/get user
+- `GET /api/users/[email]` - Get user by email
+
+### **Subscriptions (Package Bookings)**
+- `POST /api/subscriptions` - Book a package
+- `GET /api/subscriptions?userEmail=email` - Get user subscriptions
+- `GET /api/subscriptions/[id]` - Get subscription details
+
+### **Payments**
+- `POST /api/payments/create-session` - Create Cashfree payment session
+- `POST /api/payments/verify` - Verify payment status
+
+### **Admin**
+- `POST /api/admin/seed` - Seed database with sample data
