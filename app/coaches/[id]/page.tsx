@@ -81,6 +81,15 @@ export default function CoachProfilePage() {
       if (response.data) {
         // Create payment session
         const paymentData = await apiClient.createPaymentSession(response.data._id)
+        console.log("paymentData",paymentData)
+
+        if(!paymentData.paymentSessionId){
+          toast({
+            title: "Booking Failed",
+            description: "Failed to generate cashfree url",
+            variant: "destructive",
+          })
+        }
 
         // Redirect to payment
         redirectToPayment(paymentData.paymentSessionId)
@@ -99,7 +108,8 @@ export default function CoachProfilePage() {
 
   const redirectToPayment = (paymentSessionId: string) => {
     const cashfree = new window.Cashfree({
-      mode: process.env.NODE_ENV === "production" ? "production" : "sandbox",
+      // mode: process.env.NODE_ENV === "production" ? "production" : "sandbox",
+      mode: "sandbox",
     })
 
     cashfree.checkout({

@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     const db = await getDatabase()
     const subscriptions = db.collection("subscriptions")
 
-    const subscription = await subscriptions.findOne({ _id: new ObjectId(subscriptionId) })
+    const subscription = await subscriptions.findOne({ _id: new ObjectId(String(subscriptionId)) })
 
     if (!subscription) {
       return NextResponse.json({ error: "Subscription not found" }, { status: 404 })
